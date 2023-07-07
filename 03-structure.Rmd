@@ -1,10 +1,10 @@
 # Structure of a Shiny App{#structure}
 
-A shiny app looks quite different from a typical R script. A basic Shiny app consists of two objects:
+A shiny app looks quite different from a typical R script. A basic Shiny app consists of two functions:
 
-* UI object - contains the code for the UI (user interface) elements i.e the visible part of the app; takes input and displays output.
+* UI function - contains the code for the UI (user interface) elements i.e the visible part of the app; takes input and displays output.
 
-* server object - contains the code for all the calculations the app will need. It contains the logical part of the code and access input from UI, performs the computation and generates an output which is returned to the UI.
+* server function - contains the code for all the calculations the app will need. It contains the logical part of the code and access input from UI, performs the computation and generates an output which is returned to the UI.
 
 <center><img src="https://github.com/MonashBioinformaticsPlatform/r-more/blob/gh-pages/figures/shiny_explanation.png?raw=true" width="409" height="240" /></center>
 
@@ -31,7 +31,7 @@ Originally shiny apps were written across two files, one called `ui.R` and the o
 
 This is the front-end of the shiny app that allows you to capture (input) and display (output) a variety of data types. Fundamentally the UI is an HTML document with shiny functions returning chunks of HTML code. Fortunately, we don't have to write the HTML code directly ourselves, Shiny has R functions that do that instead.
 
-The UI object controls the layout and appearance of the app. The UI makes use of widgets to interact with data. In this section, we'll look at examples of layouts and shinyWidgets that insert input controls.
+The UI function controls the layout and appearance of the app. The UI makes use of widgets to interact with data. In this section, we'll look at examples of layouts and shinyWidgets that insert input controls.
 
 Here's an example of a widget: a basic slider. Open the `app_slider.R` inside `ShinyApps` folder to understand how the slider widget works.
 
@@ -83,7 +83,8 @@ ui <- fluidPage( # fluidPage - this function creates a display that auto adjusts
   # further elements set to define the appearance will be placed within fluidPage
   titlePanel("this is a title panel"),
   
-  sidebarLayout( # this function creates a layout with two pane21ls, one panel takes about a third of the screen width, the other panel takes about two thirds of the screen width.
+  sidebarLayout( # this function creates a layout with two panels, one panel takes about a third of the screen width
+    # the other panel takes about two thirds of the screen width.
     # the position of the sidebar can be moved by providing the `position = "right" argument to the sidebarLayout function
     sidebarPanel("this is the sidebar panel"),
     mainPanel("this is the main panel")
@@ -198,7 +199,7 @@ Please Note: For now, keep the `Server Logic` and `Run the App` as it is. We'll 
    
    * `sliderInput()` to add a slider where, `min = 0`; `max = 30` and selected values are: `(5,21)`
    
-4. Try replacing the list options in selectInput by `colnames(airquality)`.
+4. Try replacing the list options in selectInput by `as.list(colnames(airquality))`.
 
 Your Shiny app should look like this:
 
@@ -219,6 +220,8 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+
+> Hint: you can always access in-built datasets by calling the dataset name e.g `airquality`
 
 ## UI Output
 
@@ -277,7 +280,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Whereas the UI object contained functions for defining the interface of the application, the server function defines the logic of what to do with those inputs and outputs. It typically contains reactive variables (we'll cover those next chapter) and `renderX` functions that direct the result of a calculation to an output ui element. For each of the different types of output elements (`textOutput`, `plotOutput`, `tableOutput`), there is a corresponding render function i.e (`renderText`, `renderPlot`, `renderTable`).
+Whereas the UI functions contained functions for defining the interface of the application, the server function defines the logic of what to do with those inputs and outputs. It typically contains reactive variables (we'll cover those next chapter) and `renderX` functions that direct the result of a calculation to an output ui element. For each of the different types of output elements (`textOutput`, `plotOutput`, `tableOutput`), there is a corresponding render function i.e (`renderText`, `renderPlot`, `renderTable`).
 
 The `render` function sets up a special "reactive context" that automatically tracks the input values the output has used. It also converts the output of your R code into HTML to be display on a web page.
 
@@ -326,7 +329,7 @@ server <- function(input, output, session) {
 }
 ```
 
-Let's put togther all that we've learnt about widgets, ui output and the server to create a minimal application that will let you select the values plotted on the y-axis from the `airquality` dataset against the temperature column. (If you want to examine the airquality data-frame, use `head(airquality)` to look at the top rows.)
+Let's put together all that we've learnt about widgets, ui output and the server to create a minimal application that will let you select the values plotted on the y-axis from the `airquality` dataset against the temperature column. (If you want to examine the airquality data-frame, use `head(airquality)` to look at the top rows.)
 
 ```{r, eval=FALSE}
 library(shiny)
