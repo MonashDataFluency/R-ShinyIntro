@@ -91,32 +91,39 @@ y <- reactive({
 ### Advanced: Workings of reactive expressions {- .advanced}
 This is an optional section that explains the workings of reactive expressions in a little more detail.
 
-In the following example, we have a reactive input `input$a`, where `a =1`. We create a reactive expression, `expr1` which is just a function.
-```{r, eval =F}
-input <- reactiveValues(a=1)
-
-expr1 <- reactive({
-    (input$a + 3)*4})
-```
-
-`isolate()` helps us view the values of the reactive expression in the R console. 
-```{r, eval =F}
-
-isolate(expr1())
-```
-
-Now, we change the value of our reactive input and update the expression. Remember, we're not computing anything, we're just updating an expression.
+In the following example, we have a reactive input `input$a`, where `a =1`. We create a reactive expression, `sum`.
 ```{r, eval =F}
 input <- reactiveValues(a=5)
 
-expr1 <- reactive({
-    (input$a + 3)*4})
+sum <- reactive({
+    print("Doing a big calculation!")
+    input$a + 10
+})
 ```
 
+To get the value of `sum` we have to call it like a function, `sum()`. 
+
+When doing this on the console we have to do this inside a call to `isolate( )`, or shiny will complain about not having a "reactive context".
+ 
+```{r, eval =F}
+isolate( sum() )
+isolate( sum() )
+```
+
+We should see it do the expensive calculation the first time but not the second.
+
+Now what happens if we change the value of our reactive input? 
 
 ```{r, eval =F}
-isolate(expr1())
+input$a <- 10
+
+isolate( sum() )
+isolate( sum() )
 ```
+
+Shiny knows that the value of `sum` depended on `a`. Since `a` has changed it will recompute `sum`.
+
+
 
 ## Accessing Reactivity
 
@@ -190,13 +197,17 @@ shinyApp(ui, server)
 ```
 
 
-### Challenge 5: Create a function that uses Pythagoras theorm to calculate hypotenuse, if height and base variables are given (breakout).{- .challenge}
-In this challenge, you have 2 input sliders for `a` and `b` in the UI. Create a server function to compute Pythagoras theorm and calculate hypotenuse.
+### Challenge 5: Create a function that uses Pythagoras' theorm to calculate hypotenuse, if height and base variables are given (breakout).{- .challenge}
+In this challenge, you have 2 input sliders for `a` and `b` in the UI. Create a server function to use Pythagoras' theorm and calculate the hypotenuse `sqrt(a^2+b^2)`.
+
+As a contrived example, let us treat calculating `a^2` and `b^2` as expensive calculations. We don't want to recalculate `b^2` if only `a` has changed! Turn these calculations into reactive expressions.
+
 ```{r, eval = F}
 ui_pythagoras <- fluidPage(
     titlePanel("Hypotenuse app"),
     sliderInput("a", "Length a", 0, 10, 5),
-    sliderInput("b", "Length b", 0, 10, 5)
-    )
+    sliderInput("b", "Length b", 0, 10, 5),
+    textOutput("c")
+)
 ```
 
