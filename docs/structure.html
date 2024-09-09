@@ -23,7 +23,6 @@
 <meta name="author" content="Nitika K., Adele B., Paul F. H." />
 
 
-<meta name="date" content="2023-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -64,7 +63,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -174,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#widgets"><i class="fa fa-check"></i><b>3.3</b> Widgets</a>
 <ul>
 <li class="chapter" data-level="" data-path="structure.html"><a href="structure.html#activity-3-now-open-the-widgets.r-inside-shinyapps-folder-and-try-running-it."><i class="fa fa-check"></i>Activity 3: Now, open the <code>widgets.R</code> inside <code>ShinyApps</code> folder, and try running it.</a></li>
-<li class="chapter" data-level="" data-path="structure.html"><a href="structure.html#challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-following-breakout."><i class="fa fa-check"></i>Challenge 2: Rewrite your <code>ui</code> to create a Shiny app that contains following (Breakout).</a></li>
+<li class="chapter" data-level="" data-path="structure.html"><a href="structure.html#challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-the-following-breakout."><i class="fa fa-check"></i>Challenge 2: Rewrite your <code>ui</code> to create a Shiny app that contains the following (Breakout).</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#ui-output"><i class="fa fa-check"></i><b>3.4</b> UI Output</a></li>
 <li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#server"><i class="fa fa-check"></i><b>3.5</b> Server</a>
@@ -196,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="reactivity.html"><a href="reactivity.html#accessing-reactivity"><i class="fa fa-check"></i><b>4.3</b> Accessing Reactivity</a>
 <ul>
-<li class="chapter" data-level="" data-path="reactivity.html"><a href="reactivity.html#challenge-5-create-a-function-that-uses-pythagoras-theorm-to-calculate-hypotenuse-if-height-and-base-variables-are-given-breakout."><i class="fa fa-check"></i>Challenge 5: Create a function that uses Pythagoras theorm to calculate hypotenuse, if height and base variables are given (breakout).</a></li>
+<li class="chapter" data-level="" data-path="reactivity.html"><a href="reactivity.html#challenge-5-create-a-function-that-uses-pythagoras-theorm-to-calculate-hypotenuse-if-height-and-base-variables-are-given-breakout."><i class="fa fa-check"></i>Challenge 5: Create a function that uses Pythagoras’ theorm to calculate hypotenuse, if height and base variables are given (breakout).</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>5</b> Create Shiny App from scratch</a>
@@ -237,10 +236,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="structure" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Structure of a Shiny App<a href="structure.html#structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A shiny app looks quite different from a typical R script. A basic Shiny app consists of two objects:</p>
+<p>A shiny app looks quite different from a typical R script. A basic Shiny app consists of two functions:</p>
 <ul>
-<li><p>UI object - contains the code for the UI (user interface) elements i.e the visible part of the app; takes input and displays output.</p></li>
-<li><p>server object - contains the code for all the calculations the app will need. It contains the logical part of the code and access input from UI, performs the computation and generates an output which is returned to the UI.</p></li>
+<li><p>UI function - contains the code for the UI (user interface) elements i.e the visible part of the app; takes input and displays output.</p></li>
+<li><p>server function - contains the code for all the calculations the app will need. It contains the logical part of the code and access input from UI, performs the computation and generates an output which is returned to the UI.</p></li>
 </ul>
 <center>
 <img src="https://github.com/MonashBioinformaticsPlatform/r-more/blob/gh-pages/figures/shiny_explanation.png?raw=true" width="409" height="240" />
@@ -249,43 +248,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  
 </p>
 <p>The skeleton of a Shiny app looks like:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="structure.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb1-2"><a href="structure.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="structure.html#cb1-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb1-4"><a href="structure.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># front end interface</span></span>
-<span id="cb1-5"><a href="structure.html#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="structure.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="structure.html#cb1-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb1-8"><a href="structure.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># back end logic</span></span>
-<span id="cb1-9"><a href="structure.html#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-10"><a href="structure.html#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="structure.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server) <span class="co"># runs the app</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="structure.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb1-2"><a href="structure.html#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="structure.html#cb1-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-4"><a href="structure.html#cb1-4" tabindex="-1"></a>  <span class="co"># front end interface</span></span>
+<span id="cb1-5"><a href="structure.html#cb1-5" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="structure.html#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="structure.html#cb1-7" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb1-8"><a href="structure.html#cb1-8" tabindex="-1"></a>  <span class="co"># back end logic</span></span>
+<span id="cb1-9"><a href="structure.html#cb1-9" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="structure.html#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="structure.html#cb1-11" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server) <span class="co"># runs the app</span></span></code></pre></div>
 <p>Originally shiny apps were written across two files, one called <code>ui.R</code> and the other <code>server.R</code> - with the code for the ui seperate in the UI file and the code for the server function contained in its own file. You may encounter this structure if you examine the code for an old applications. It is still possible to write shiny applications this way but we will not be covering it in this course. We will be teaching you how to write apps in 1 file.</p>
 <div id="ui" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> UI<a href="structure.html#ui" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This is the front-end of the shiny app that allows you to capture (input) and display (output) a variety of data types. Fundamentally the UI is an HTML document with shiny functions returning chunks of HTML code. Fortunately, we don’t have to write the HTML code directly ourselves, Shiny has R functions that do that instead.</p>
-<p>The UI object controls the layout and appearance of the app. The UI makes use of widgets to interact with data. In this section, we’ll look at examples of layouts and shinyWidgets that insert input controls.</p>
+<p>The UI function controls the layout and appearance of the app. The UI makes use of widgets to interact with data. In this section, we’ll look at examples of layouts and shinyWidgets that insert input controls.</p>
 <p>Here’s an example of a widget: a basic slider. Open the <code>app_slider.R</code> inside <code>ShinyApps</code> folder to understand how the slider widget works.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="structure.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb2-2"><a href="structure.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">&quot;slider1&quot;</span>, <span class="st">&quot;Decimal&quot;</span>,</span>
-<span id="cb2-3"><a href="structure.html#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>,</span>
-<span id="cb2-4"><a href="structure.html#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">value =</span> <span class="fl">0.8</span>, <span class="at">step =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="structure.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb2-2"><a href="structure.html#cb2-2" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">&quot;slider1&quot;</span>, <span class="st">&quot;Decimal&quot;</span>,</span>
+<span id="cb2-3"><a href="structure.html#cb2-3" tabindex="-1"></a>            <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>,</span>
+<span id="cb2-4"><a href="structure.html#cb2-4" tabindex="-1"></a>            <span class="at">value =</span> <span class="fl">0.8</span>, <span class="at">step =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <p><img src="figs/slider.png" style="width:50.0%" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="structure.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">renderPrint</span>({<span class="fu">paste</span>(<span class="st">&quot;The number selected by the slider is:&quot;</span>, input<span class="sc">$</span>slider1)})</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="structure.html#cb3-1" tabindex="-1"></a><span class="fu">renderPrint</span>({<span class="fu">paste</span>(<span class="st">&quot;The number selected by the slider is:&quot;</span>, input<span class="sc">$</span>slider1)})</span></code></pre></div>
 <p><img src="figs/slider_out.png" style="width:60.0%" /></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="structure.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb4-2"><a href="structure.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidPage</span>(</span>
-<span id="cb4-3"><a href="structure.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-4"><a href="structure.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Copy the chunk below to make a group of checkboxes</span></span>
-<span id="cb4-5"><a href="structure.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="st">&quot;checkGroup&quot;</span>, <span class="at">label =</span> <span class="fu">h3</span>(<span class="st">&quot;Checkbox group&quot;</span>), </span>
-<span id="cb4-6"><a href="structure.html#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
-<span id="cb4-7"><a href="structure.html#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">selected =</span> <span class="dv">2</span>),</span>
-<span id="cb4-8"><a href="structure.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-9"><a href="structure.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-10"><a href="structure.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hr</span>(),</span>
-<span id="cb4-11"><a href="structure.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(<span class="fu">column</span>(<span class="dv">3</span>, <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;value&quot;</span>)))</span>
-<span id="cb4-12"><a href="structure.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-13"><a href="structure.html#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="structure.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb4-2"><a href="structure.html#cb4-2" tabindex="-1"></a><span class="fu">fluidPage</span>(</span>
+<span id="cb4-3"><a href="structure.html#cb4-3" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="structure.html#cb4-4" tabindex="-1"></a>  <span class="co"># Copy the chunk below to make a group of checkboxes</span></span>
+<span id="cb4-5"><a href="structure.html#cb4-5" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="st">&quot;checkGroup&quot;</span>, <span class="at">label =</span> <span class="fu">h3</span>(<span class="st">&quot;Checkbox group&quot;</span>), </span>
+<span id="cb4-6"><a href="structure.html#cb4-6" tabindex="-1"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
+<span id="cb4-7"><a href="structure.html#cb4-7" tabindex="-1"></a>    <span class="at">selected =</span> <span class="dv">2</span>),</span>
+<span id="cb4-8"><a href="structure.html#cb4-8" tabindex="-1"></a>  </span>
+<span id="cb4-9"><a href="structure.html#cb4-9" tabindex="-1"></a>  </span>
+<span id="cb4-10"><a href="structure.html#cb4-10" tabindex="-1"></a>  <span class="fu">hr</span>(),</span>
+<span id="cb4-11"><a href="structure.html#cb4-11" tabindex="-1"></a>  <span class="fu">fluidRow</span>(<span class="fu">column</span>(<span class="dv">3</span>, <span class="fu">verbatimTextOutput</span>(<span class="st">&quot;value&quot;</span>)))</span>
+<span id="cb4-12"><a href="structure.html#cb4-12" tabindex="-1"></a>  </span>
+<span id="cb4-13"><a href="structure.html#cb4-13" tabindex="-1"></a>)</span></code></pre></div>
 <div class="container-fluid">
 <div id="checkGroup" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="checkGroup-label">
 <label class="control-label" id="checkGroup-label" for="checkGroup">
@@ -326,16 +325,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> Layout<a href="structure.html#layout" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The complexity of your application may have an impact on the complexity of your layout. For instance, an application that contains only one or two widgets and one or two outputs may only need one page to fit all these elements. If however there are lot of controls and results to display it might be easier to organize these under tabs or a navbar.</p>
 <p>A layout with three panels: a title panel, a sidebar panel and a main panel.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="structure.html#cb5-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( <span class="co"># fluidPage - this function creates a display that auto adjusts to the browser window</span></span>
-<span id="cb5-2"><a href="structure.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># further elements set to define the appearance will be placed within fluidPage</span></span>
-<span id="cb5-3"><a href="structure.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;this is a title panel&quot;</span>),</span>
-<span id="cb5-4"><a href="structure.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-5"><a href="structure.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>( <span class="co"># this function creates a layout with two pane21ls, one panel takes about a third of the screen width, the other panel takes about two thirds of the screen width.</span></span>
-<span id="cb5-6"><a href="structure.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the position of the sidebar can be moved by providing the `position = &quot;right&quot; argument to the sidebarLayout function</span></span>
-<span id="cb5-7"><a href="structure.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(<span class="st">&quot;this is the sidebar panel&quot;</span>),</span>
-<span id="cb5-8"><a href="structure.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(<span class="st">&quot;this is the main panel&quot;</span>)</span>
-<span id="cb5-9"><a href="structure.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-10"><a href="structure.html#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="structure.html#cb5-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( <span class="co"># fluidPage - this function creates a display that auto adjusts to the browser window</span></span>
+<span id="cb5-2"><a href="structure.html#cb5-2" tabindex="-1"></a>  <span class="co"># further elements set to define the appearance will be placed within fluidPage</span></span>
+<span id="cb5-3"><a href="structure.html#cb5-3" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;this is a title panel&quot;</span>),</span>
+<span id="cb5-4"><a href="structure.html#cb5-4" tabindex="-1"></a>  </span>
+<span id="cb5-5"><a href="structure.html#cb5-5" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>( <span class="co"># this function creates a layout with two panels, one panel takes about a third of the screen width</span></span>
+<span id="cb5-6"><a href="structure.html#cb5-6" tabindex="-1"></a>    <span class="co"># the other panel takes about two thirds of the screen width.</span></span>
+<span id="cb5-7"><a href="structure.html#cb5-7" tabindex="-1"></a>    <span class="co"># the position of the sidebar can be moved by providing the `position = &quot;right&quot; argument to the sidebarLayout function</span></span>
+<span id="cb5-8"><a href="structure.html#cb5-8" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(<span class="st">&quot;this is the sidebar panel&quot;</span>),</span>
+<span id="cb5-9"><a href="structure.html#cb5-9" tabindex="-1"></a>    <span class="fu">mainPanel</span>(<span class="st">&quot;this is the main panel&quot;</span>)</span>
+<span id="cb5-10"><a href="structure.html#cb5-10" tabindex="-1"></a>  )</span>
+<span id="cb5-11"><a href="structure.html#cb5-11" tabindex="-1"></a>)</span></code></pre></div>
 <p>This is where Shiny starts to get a little tricky, a lot of ui code will be end up being nested in more code. So far, we have the <code>sidebarPanel</code> widget nested inside <code>siderbarLayout</code> <strong>which is nested in</strong> <code>fluidPage</code>. So we’ve stuck a function inside a function inside a function. Phew, that’s a lot to keep track of! We could easily place widgets inside the <code>sidebarPanel</code> function - they’d be nested even futher! Many common problems that’ll prevent a shiny app from running simply come from just putting a comma or a bracket in the wrong place.</p>
 <blockquote>
 <p>We cannot emphasis this point enough - <strong>keeping track of opening and closing brackets and your commas is a good skill to cultivate when building Shiny apps!</strong> One quick way to check on your brackets is to move the cursor next to a bracket - in RStudio - that will highlight the other bracket paired with if (if one exists, that is!).</p>
@@ -346,26 +346,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>The degree to which functions are nested in each other to build the UI can be overwhelming to look at when you are getting started. As you become more experienced with writing Shiny, you’ll get used to examining your UI element code with an eagle eye to make sure you haven’t misplaced a comma or bracket.</p>
 <p>The above layout is probably the most common layout used with shiny apps. It’s good for an app with only a few number of components. You may want to add a navbar and tab sets if you have a large number of components.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="structure.html#cb6-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
-<span id="cb6-2"><a href="structure.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;this is a title panel&quot;</span>),</span>
-<span id="cb6-3"><a href="structure.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-4"><a href="structure.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>( </span>
-<span id="cb6-5"><a href="structure.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(<span class="st">&quot;this is the sidebar panel&quot;</span>),</span>
-<span id="cb6-6"><a href="structure.html#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>( </span>
-<span id="cb6-7"><a href="structure.html#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>( <span class="co"># this function takes an argument of `position = &quot;left&quot;` (arguments can be &quot;left&quot;, &quot;right&quot;, &quot;below&quot;. default is above)</span></span>
-<span id="cb6-8"><a href="structure.html#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># this argument directs where the tabs are positioned</span></span>
-<span id="cb6-9"><a href="structure.html#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;plot results&quot;</span>),</span>
-<span id="cb6-10"><a href="structure.html#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;table results&quot;</span>),</span>
-<span id="cb6-11"><a href="structure.html#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;fun gifs&quot;</span>)</span>
-<span id="cb6-12"><a href="structure.html#cb6-12" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb6-13"><a href="structure.html#cb6-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-14"><a href="structure.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-15"><a href="structure.html#cb6-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="structure.html#cb6-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
+<span id="cb6-2"><a href="structure.html#cb6-2" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;this is a title panel&quot;</span>),</span>
+<span id="cb6-3"><a href="structure.html#cb6-3" tabindex="-1"></a>  </span>
+<span id="cb6-4"><a href="structure.html#cb6-4" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>( </span>
+<span id="cb6-5"><a href="structure.html#cb6-5" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(<span class="st">&quot;this is the sidebar panel&quot;</span>),</span>
+<span id="cb6-6"><a href="structure.html#cb6-6" tabindex="-1"></a>    <span class="fu">mainPanel</span>( </span>
+<span id="cb6-7"><a href="structure.html#cb6-7" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>( <span class="co"># this function takes an argument of `position = &quot;left&quot;` (arguments can be &quot;left&quot;, &quot;right&quot;, &quot;below&quot;. default is above)</span></span>
+<span id="cb6-8"><a href="structure.html#cb6-8" tabindex="-1"></a>        <span class="co"># this argument directs where the tabs are positioned</span></span>
+<span id="cb6-9"><a href="structure.html#cb6-9" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;plot results&quot;</span>),</span>
+<span id="cb6-10"><a href="structure.html#cb6-10" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;table results&quot;</span>),</span>
+<span id="cb6-11"><a href="structure.html#cb6-11" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">&quot;fun gifs&quot;</span>)</span>
+<span id="cb6-12"><a href="structure.html#cb6-12" tabindex="-1"></a>      )</span>
+<span id="cb6-13"><a href="structure.html#cb6-13" tabindex="-1"></a>    )</span>
+<span id="cb6-14"><a href="structure.html#cb6-14" tabindex="-1"></a>  )</span>
+<span id="cb6-15"><a href="structure.html#cb6-15" tabindex="-1"></a>)</span></code></pre></div>
 <p>For more information about the application layout (including nav bars and lists), we recommend this <a href="https://shiny.rstudio.com/articles/layout-guide.html">resource</a>. For more information about tab sets specifically, we recommend this <a href="https://shiny.rstudio.com/articles/tabsets.html">article</a>.</p>
 <p>Another thing to note that a lot of the functions that build the UI are essentially wrapping HTML code within R functions. This means that the UI can also be customized by directly writing HTML code or by using <a href="https://shiny.rstudio.com/articles/tag-glossary.html">wrapper tag functions</a>. This is beyond the scope of this course but we thought it was worth mentioning.</p>
 <div id="activity-2-ui-layouts" class="section level3 unnumbered activity hasAnchor">
 <h3>Activity 2: UI Layouts<a href="structure.html#activity-2-ui-layouts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Does the <code>tabsetPanel</code> need to be nested in the <code>sidebarLayout</code>? Modify the layout of <code>app_ui.R</code> to include a titlepanel, sidebarpanel for input and mainpanel for output.</p>
+<ol style="list-style-type: decimal">
+<li>Does the <code>tabsetPanel</code> need to be nested in the <code>sidebarLayout</code>?</li>
+<li>Modify the layout of <code>app_ui.R</code> to include a titlepanel, sidebarpanel for input and mainpanel for output.</li>
+</ol>
 </div>
 </div>
 <div id="widgets" class="section level2 hasAnchor" number="3.3">
@@ -382,40 +385,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="navbar-header">
 <span class="navbar-brand">Navbar</span>
 </div>
-<ul class="nav navbar-nav" data-tabsetid="8317">
+<ul class="nav navbar-nav" data-tabsetid="7856">
 <li class="active">
-<a href="structure.html#tab-8317-1" data-toggle="tab" data-bs-toggle="tab" data-value="Widgets!">Widgets!</a>
+<a href="structure.html#tab-7856-1" data-toggle="tab" data-bs-toggle="tab" data-value="Widgets!">Widgets!</a>
 </li>
 <li>
-<a href="structure.html#tab-8317-2" data-toggle="tab" data-bs-toggle="tab" data-value="More widgets!">More widgets!</a>
+<a href="structure.html#tab-7856-2" data-toggle="tab" data-bs-toggle="tab" data-value="More widgets!">More widgets!</a>
 </li>
 </ul>
 </div>
 </nav>
 <div class="container-fluid">
-<div class="tab-content" data-tabsetid="8317">
-<div class="tab-pane active" data-value="Widgets!" id="tab-8317-1">
+<div class="tab-content" data-tabsetid="7856">
+<div class="tab-pane active" data-value="Widgets!" id="tab-7856-1">
 <div class="form-group shiny-input-container">
 <label class="control-label" id="select-label" for="select">
 <h3>Select box</h3>
 </label>
 <div>
-<select id="select"><option value="1" selected>Choice 1</option>
+<select id="select" class="shiny-input-select"><option value="1" selected>Choice 1</option>
 <option value="2">Choice 2</option>
 <option value="3">Choice 3</option></select>
 <script type="application/json" data-for="select" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
 </div>
 </div>
-<pre class="shiny-text-output noplaceholder" id="out0e5724126cd433bd"></pre>
+<pre class="shiny-text-output noplaceholder" id="oute0f28279a71f349b"></pre>
 <div class="form-group shiny-input-container">
 <label class="control-label" id="text-label" for="text">
 <h3>Text input</h3>
 </label>
-<input id="text" type="text" class="form-control" value="Enter text..."/>
+<input id="text" type="text" class="shiny-input-text form-control" value="Enter text..."/>
 </div>
-<pre class="shiny-text-output noplaceholder" id="outec5ec611988b65ca"></pre>
+<pre class="shiny-text-output noplaceholder" id="out6a06d4a8f10497b9"></pre>
 </div>
-<div class="tab-pane" data-value="More widgets!" id="tab-8317-2">
+<div class="tab-pane" data-value="More widgets!" id="tab-7856-2">
 <div id="checkGroup" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="checkGroup-label">
 <label class="control-label" id="checkGroup-label" for="checkGroup">
 <h3>Checkbox group</h3>
@@ -441,14 +444,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<pre class="shiny-text-output noplaceholder" id="out6372a1a1bec02968"></pre>
+<pre class="shiny-text-output noplaceholder" id="outd7897e1b3c5d0803"></pre>
 </div>
 </div>
 </div>
 <p>We can examine the code that generates the <code>selectInput</code> with the title ‘Select box’:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="structure.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;choice_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select box&quot;</span>,</span>
-<span id="cb7-2"><a href="structure.html#cb7-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
-<span id="cb7-3"><a href="structure.html#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">selected =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="structure.html#cb7-1" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;choice_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select box&quot;</span>,</span>
+<span id="cb7-2"><a href="structure.html#cb7-2" tabindex="-1"></a>            <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
+<span id="cb7-3"><a href="structure.html#cb7-3" tabindex="-1"></a>            <span class="at">selected =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>The <code>inputId</code> is <code>choice_select</code>, so if we want to use the values generated by this widget on the server side, we’d access it with <code>input$choice_select</code>. You can name the <code>inputId</code> however you like so long as you don’t use the same id for another input widget but it’s generally useful to name it something related to whatever that input is doing. The <code>label</code> arguement is the text to be displayed above the widget in the UI. The <code>choices</code> argument takes a list. This list can either be unnamed or named. In the case of a named list, such as the one above, the names will be displayed on the UI (e.g “Choice 1”) while the value (e.g 1) will be passed to the server side to be use1d for further computations. For an unnamed list, the value will both be displayed on the UI and passed to the server side. The <code>selected</code> arguement tells Shiny which of the list values it should display by default when the app loads - in this case, it will start with the value in the choices list that matches the value of <code>1</code>, which is <code>Choice 1</code>.</p>
 <p>To learn more about the arguments that a widget takes, the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">Widget Gallery</a> is usually a good starting point.</p>
 <div id="activity-3-now-open-the-widgets.r-inside-shinyapps-folder-and-try-running-it." class="section level3 unnumbered activity hasAnchor">
@@ -456,10 +459,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are a variety of widgets available in Shiny Apps. Have a go at them!!</p>
 <p>Please Note: For now, keep the <code>Server Logic</code> and <code>Run the App</code> as it is. We’ll explain these in next sections.</p>
 </div>
-<div id="challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-following-breakout." class="section level3 unnumbered challenge hasAnchor">
-<h3>Challenge 2: Rewrite your <code>ui</code> to create a Shiny app that contains following (Breakout).<a href="structure.html#challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-following-breakout." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-the-following-breakout." class="section level3 unnumbered challenge hasAnchor">
+<h3>Challenge 2: Rewrite your <code>ui</code> to create a Shiny app that contains the following (Breakout).<a href="structure.html#challenge-2-rewrite-your-ui-to-create-a-shiny-app-that-contains-the-following-breakout." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li><p>Title that says “Challenge 2”. Use <code>sidebarLayout()</code> to include a side panel and a main panel.</p></li>
+<li><p>Title that says “Challenge 2”. Use a <code>sidebarLayout()</code> to include a side panel and a main panel.</p></li>
 <li><p>Select <code>airquality</code> from the default datasets in R (Hint: Refer to <code>app_ui.R</code>).</p></li>
 <li><p>Create three widgets:</p>
 <ul>
@@ -467,7 +470,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>selectInput()</code> to list variables in the <code>airquality</code> dataset and pre-select <code>wind</code> dataset.</p></li>
 <li><p><code>sliderInput()</code> to add a slider where, <code>min = 0</code>; <code>max = 30</code> and selected values are: <code>(5,21)</code></p></li>
 </ul></li>
-<li><p>Try replacing the list options in selectInput by <code>colnames(airquality)</code>.</p></li>
+<li><p>Try replacing the list options in selectInput by <code>as.list(colnames(airquality))</code>.</p></li>
 </ol>
 <p>Your Shiny app should look like this:</p>
 <img src="figs/challenge2.png" width="350" />
@@ -477,42 +480,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Hint: Use the Shiny skeleton code to create a new R-script and edit the UI part:</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="structure.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb8-2"><a href="structure.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="structure.html#cb8-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb8-4"><a href="structure.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># edit this part</span></span>
-<span id="cb8-5"><a href="structure.html#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-6"><a href="structure.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="structure.html#cb8-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb8-8"><a href="structure.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-9"><a href="structure.html#cb8-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-10"><a href="structure.html#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="structure.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="structure.html#cb8-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb8-2"><a href="structure.html#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="structure.html#cb8-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb8-4"><a href="structure.html#cb8-4" tabindex="-1"></a>  <span class="co"># edit this part</span></span>
+<span id="cb8-5"><a href="structure.html#cb8-5" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="structure.html#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="structure.html#cb8-7" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb8-8"><a href="structure.html#cb8-8" tabindex="-1"></a>  </span>
+<span id="cb8-9"><a href="structure.html#cb8-9" tabindex="-1"></a>}</span>
+<span id="cb8-10"><a href="structure.html#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="structure.html#cb8-11" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<blockquote>
+<p>Hint: you can always access in-built datasets by calling the dataset name e.g <code>airquality</code></p>
+</blockquote>
 </div>
 </div>
 <div id="ui-output" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> UI Output<a href="structure.html#ui-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The UI also contains elements for displaying output results. The list of this is not as expansive as the widgets and can be <a href="https://shiny.rstudio.com/reference/shiny/1.7.0/">found here (under UI outputs)</a>. The type of result you want displayed in your application determines the type of UI element that you need.</p>
 <p>For example, if your application is going to return a text result, then you probably want a <code>textOutput</code> element:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="structure.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
-<span id="cb9-2"><a href="structure.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb9-3"><a href="structure.html#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(), <span class="co"># Put your input widgets on this panel</span></span>
-<span id="cb9-4"><a href="structure.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb9-5"><a href="structure.html#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;text_result&quot;</span>)</span>
-<span id="cb9-6"><a href="structure.html#cb9-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-7"><a href="structure.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-8"><a href="structure.html#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="structure.html#cb9-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
+<span id="cb9-2"><a href="structure.html#cb9-2" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb9-3"><a href="structure.html#cb9-3" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(), <span class="co"># Put your input widgets on this panel</span></span>
+<span id="cb9-4"><a href="structure.html#cb9-4" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb9-5"><a href="structure.html#cb9-5" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;text_result&quot;</span>)</span>
+<span id="cb9-6"><a href="structure.html#cb9-6" tabindex="-1"></a>    )</span>
+<span id="cb9-7"><a href="structure.html#cb9-7" tabindex="-1"></a>  )</span>
+<span id="cb9-8"><a href="structure.html#cb9-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Similar to the <code>inputId</code> for widgets, the <code>outputId</code> for each output element needs to uniquely named.</p>
 <p>The main output elements commonly used are <code>textOutput</code>, <code>plotOutput</code> and <code>tableOutput</code> and they are used respectively for displaying text, plots and tables as their names suggests.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="structure.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
-<span id="cb10-2"><a href="structure.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb10-3"><a href="structure.html#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(), <span class="co"># Put your input widgets on this panel</span></span>
-<span id="cb10-4"><a href="structure.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb10-5"><a href="structure.html#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;text_result&quot;</span>),</span>
-<span id="cb10-6"><a href="structure.html#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;plot_result&quot;</span>, <span class="at">width =</span> <span class="st">&quot;400px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;100%&quot;</span> )</span>
-<span id="cb10-7"><a href="structure.html#cb10-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-8"><a href="structure.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-9"><a href="structure.html#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="structure.html#cb10-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
+<span id="cb10-2"><a href="structure.html#cb10-2" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb10-3"><a href="structure.html#cb10-3" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(), <span class="co"># Put your input widgets on this panel</span></span>
+<span id="cb10-4"><a href="structure.html#cb10-4" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb10-5"><a href="structure.html#cb10-5" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;text_result&quot;</span>),</span>
+<span id="cb10-6"><a href="structure.html#cb10-6" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;plot_result&quot;</span>, <span class="at">width =</span> <span class="st">&quot;400px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;100%&quot;</span> )</span>
+<span id="cb10-7"><a href="structure.html#cb10-7" tabindex="-1"></a>    )</span>
+<span id="cb10-8"><a href="structure.html#cb10-8" tabindex="-1"></a>  )</span>
+<span id="cb10-9"><a href="structure.html#cb10-9" tabindex="-1"></a>)</span></code></pre></div>
 <p>While the output functions do take a few arguments, generally the most you need to do is give them an <code>outputId</code>. If you are looking at the <code>plot_result</code> function and wondering where the code to generate the plot belongs, then it’s time to move on to the server function.</p>
 </div>
 <div id="server" class="section level2 hasAnchor" number="3.5">
@@ -520,109 +526,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The server function is the back-end of the application. It contains the code for data processing, analysis and plotting. It takes input from the UI, runs (and re-runs) code chunks defined within, generates a result and sends it to the UI output elements.</p>
 <p>The server logic follows reactive programming, which defines a graph of dependencies. The idea is that when the input changes, all related outputs are updated. This makes the Shiny App interactive.</p>
 <p>In the Shiny skeleton code, server is defined as a function with three arguments- input, output and session. These arguments are created by Shiny when the application starts and cannot be changed.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="structure.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb11-2"><a href="structure.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="structure.html#cb11-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb11-4"><a href="structure.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># front end interface</span></span>
-<span id="cb11-5"><a href="structure.html#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-6"><a href="structure.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="structure.html#cb11-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb11-8"><a href="structure.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># back end logic</span></span>
-<span id="cb11-9"><a href="structure.html#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-10"><a href="structure.html#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="structure.html#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
-<p>Whereas the UI object contained functions for defining the interface of the application, the server function defines the logic of what to do with those inputs and outputs. It typically contains reactive variables (we’ll cover those next chapter) and <code>renderX</code> functions that direct the result of a calculation to an output ui element. For each of the different types of output elements (<code>textOutput</code>, <code>plotOutput</code>, <code>tableOutput</code>), there is a corresponding render function i.e (<code>renderText</code>, <code>renderPlot</code>, <code>renderTable</code>).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="structure.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb11-2"><a href="structure.html#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="structure.html#cb11-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb11-4"><a href="structure.html#cb11-4" tabindex="-1"></a>  <span class="co"># front end interface</span></span>
+<span id="cb11-5"><a href="structure.html#cb11-5" tabindex="-1"></a>)</span>
+<span id="cb11-6"><a href="structure.html#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="structure.html#cb11-7" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb11-8"><a href="structure.html#cb11-8" tabindex="-1"></a>  <span class="co"># back end logic</span></span>
+<span id="cb11-9"><a href="structure.html#cb11-9" tabindex="-1"></a>}</span>
+<span id="cb11-10"><a href="structure.html#cb11-10" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="structure.html#cb11-11" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<p>Whereas the UI functions contained functions for defining the interface of the application, the server function defines the logic of what to do with those inputs and outputs. It typically contains reactive variables (we’ll cover those next chapter) and <code>renderX</code> functions that direct the result of a calculation to an output ui element. For each of the different types of output elements (<code>textOutput</code>, <code>plotOutput</code>, <code>tableOutput</code>), there is a corresponding render function i.e (<code>renderText</code>, <code>renderPlot</code>, <code>renderTable</code>).</p>
 <p>The <code>render</code> function sets up a special “reactive context” that automatically tracks the input values the output has used. It also converts the output of your R code into HTML to be display on a web page.</p>
 <p>The structure in the server function typically looks like this:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="structure.html#cb12-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb12-2"><a href="structure.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-3"><a href="structure.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We assign the result of a render function to an output element</span></span>
-<span id="cb12-4"><a href="structure.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ </span>
-<span id="cb12-5"><a href="structure.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Code to do a calculation that generates a plot result</span></span>
-<span id="cb12-6"><a href="structure.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="do">## This where your &#39;regular&#39; R code is placed</span></span>
-<span id="cb12-7"><a href="structure.html#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## to access values from widgets, use the syntax input$widget_id</span></span>
-<span id="cb12-8"><a href="structure.html#cb12-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-9"><a href="structure.html#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## The function below will subset the airquality dataset into 2 columns</span></span>
-<span id="cb12-10"><a href="structure.html#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="do">## It grabs column 4 (Temp) and either columns 1-3 </span></span>
-<span id="cb12-11"><a href="structure.html#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="do">## depending on the choice from the selectInput called choice_select</span></span>
-<span id="cb12-12"><a href="structure.html#cb12-12" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> airquality[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select))]</span>
-<span id="cb12-13"><a href="structure.html#cb12-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-14"><a href="structure.html#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="do">## This function now plots the two columns</span></span>
-<span id="cb12-15"><a href="structure.html#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="do">## We can change the data being plotted on the y-axis</span></span>
-<span id="cb12-16"><a href="structure.html#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Whenever we change the value selected by the </span></span>
-<span id="cb12-17"><a href="structure.html#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="do">## selectInput widget</span></span>
-<span id="cb12-18"><a href="structure.html#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> df[, <span class="dv">1</span>], <span class="at">y =</span> df[, <span class="dv">2</span>])</span>
-<span id="cb12-19"><a href="structure.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb12-20"><a href="structure.html#cb12-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="structure.html#cb12-1" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb12-2"><a href="structure.html#cb12-2" tabindex="-1"></a>  </span>
+<span id="cb12-3"><a href="structure.html#cb12-3" tabindex="-1"></a>  <span class="co"># We assign the result of a render function to an output element</span></span>
+<span id="cb12-4"><a href="structure.html#cb12-4" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({ </span>
+<span id="cb12-5"><a href="structure.html#cb12-5" tabindex="-1"></a>    <span class="do">## Code to do a calculation that generates a plot result</span></span>
+<span id="cb12-6"><a href="structure.html#cb12-6" tabindex="-1"></a>    <span class="do">## This where your &#39;regular&#39; R code is placed</span></span>
+<span id="cb12-7"><a href="structure.html#cb12-7" tabindex="-1"></a>    <span class="do">## to access values from widgets, use the syntax input$widget_id</span></span>
+<span id="cb12-8"><a href="structure.html#cb12-8" tabindex="-1"></a>    </span>
+<span id="cb12-9"><a href="structure.html#cb12-9" tabindex="-1"></a>    <span class="do">## The function below will subset the airquality dataset into 2 columns</span></span>
+<span id="cb12-10"><a href="structure.html#cb12-10" tabindex="-1"></a>    <span class="do">## It grabs column 4 (Temp) and either columns 1-3 </span></span>
+<span id="cb12-11"><a href="structure.html#cb12-11" tabindex="-1"></a>    <span class="do">## depending on the choice from the selectInput called choice_select</span></span>
+<span id="cb12-12"><a href="structure.html#cb12-12" tabindex="-1"></a>    df <span class="ot">&lt;-</span> airquality[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select))]</span>
+<span id="cb12-13"><a href="structure.html#cb12-13" tabindex="-1"></a>    </span>
+<span id="cb12-14"><a href="structure.html#cb12-14" tabindex="-1"></a>    <span class="do">## This function now plots the two columns</span></span>
+<span id="cb12-15"><a href="structure.html#cb12-15" tabindex="-1"></a>    <span class="do">## We can change the data being plotted on the y-axis</span></span>
+<span id="cb12-16"><a href="structure.html#cb12-16" tabindex="-1"></a>    <span class="do">## Whenever we change the value selected by the </span></span>
+<span id="cb12-17"><a href="structure.html#cb12-17" tabindex="-1"></a>    <span class="do">## selectInput widget</span></span>
+<span id="cb12-18"><a href="structure.html#cb12-18" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> df[, <span class="dv">1</span>], <span class="at">y =</span> df[, <span class="dv">2</span>])</span>
+<span id="cb12-19"><a href="structure.html#cb12-19" tabindex="-1"></a>  })</span>
+<span id="cb12-20"><a href="structure.html#cb12-20" tabindex="-1"></a>}</span></code></pre></div>
 <p>For each output element that we create in the UI, if we want it to display a result, we then need a corresponding <code>renderX</code> function in the server side that directs a results to be displayed e.g:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="structure.html#cb13-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb13-2"><a href="structure.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-3"><a href="structure.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>text_result <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb13-4"><a href="structure.html#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="do">## the print function here is optional</span></span>
-<span id="cb13-5"><a href="structure.html#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="do">## including it means that it will print the results to the console while the app is running</span></span>
-<span id="cb13-6"><a href="structure.html#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="do">## which is a useful way to debug what you app is doing </span></span>
-<span id="cb13-7"><a href="structure.html#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The selected column index is:&quot;</span>, input<span class="sc">$</span>choice_select))</span>
-<span id="cb13-8"><a href="structure.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb13-9"><a href="structure.html#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="structure.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb13-11"><a href="structure.html#cb13-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-12"><a href="structure.html#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> airquality[, <span class="dv">4</span>], <span class="at">y =</span> airquality[, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select)])</span>
-<span id="cb13-13"><a href="structure.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-14"><a href="structure.html#cb13-14" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb13-15"><a href="structure.html#cb13-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Let’s put togther all that we’ve learnt about widgets, ui output and the server to create a minimal application that will let you select the values plotted on the y-axis from the <code>airquality</code> dataset against the temperature column. (If you want to examine the airquality data-frame, use <code>head(airquality)</code> to look at the top rows.)</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="structure.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb14-2"><a href="structure.html#cb14-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb14-3"><a href="structure.html#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;choice_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select box&quot;</span>,</span>
-<span id="cb14-4"><a href="structure.html#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
-<span id="cb14-5"><a href="structure.html#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">selected =</span> <span class="dv">1</span>),</span>
-<span id="cb14-6"><a href="structure.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb14-7"><a href="structure.html#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;plot_result&quot;</span>)</span>
-<span id="cb14-8"><a href="structure.html#cb14-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-9"><a href="structure.html#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-10"><a href="structure.html#cb14-10" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb14-11"><a href="structure.html#cb14-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-12"><a href="structure.html#cb14-12" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb14-13"><a href="structure.html#cb14-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-14"><a href="structure.html#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> airquality[, <span class="dv">4</span>], <span class="at">y =</span> airquality[, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select)])</span>
-<span id="cb14-15"><a href="structure.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-16"><a href="structure.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb14-17"><a href="structure.html#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-18"><a href="structure.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="structure.html#cb13-1" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb13-2"><a href="structure.html#cb13-2" tabindex="-1"></a>  </span>
+<span id="cb13-3"><a href="structure.html#cb13-3" tabindex="-1"></a>  output<span class="sc">$</span>text_result <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb13-4"><a href="structure.html#cb13-4" tabindex="-1"></a>    <span class="do">## the print function here is optional</span></span>
+<span id="cb13-5"><a href="structure.html#cb13-5" tabindex="-1"></a>    <span class="do">## including it means that it will print the results to the console while the app is running</span></span>
+<span id="cb13-6"><a href="structure.html#cb13-6" tabindex="-1"></a>    <span class="do">## which is a useful way to debug what you app is doing </span></span>
+<span id="cb13-7"><a href="structure.html#cb13-7" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The selected column index is:&quot;</span>, input<span class="sc">$</span>choice_select))</span>
+<span id="cb13-8"><a href="structure.html#cb13-8" tabindex="-1"></a>  })</span>
+<span id="cb13-9"><a href="structure.html#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="structure.html#cb13-10" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb13-11"><a href="structure.html#cb13-11" tabindex="-1"></a>    </span>
+<span id="cb13-12"><a href="structure.html#cb13-12" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> airquality[, <span class="dv">4</span>], <span class="at">y =</span> airquality[, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select)])</span>
+<span id="cb13-13"><a href="structure.html#cb13-13" tabindex="-1"></a>  </span>
+<span id="cb13-14"><a href="structure.html#cb13-14" tabindex="-1"></a>  })</span>
+<span id="cb13-15"><a href="structure.html#cb13-15" tabindex="-1"></a>}</span></code></pre></div>
+<p>Let’s put together all that we’ve learnt about widgets, ui output and the server to create a minimal application that will let you select the values plotted on the y-axis from the <code>airquality</code> dataset against the temperature column. (If you want to examine the airquality data-frame, use <code>head(airquality)</code> to look at the top rows.)</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="structure.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb14-2"><a href="structure.html#cb14-2" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb14-3"><a href="structure.html#cb14-3" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;choice_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select box&quot;</span>,</span>
+<span id="cb14-4"><a href="structure.html#cb14-4" tabindex="-1"></a>            <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
+<span id="cb14-5"><a href="structure.html#cb14-5" tabindex="-1"></a>            <span class="at">selected =</span> <span class="dv">1</span>),</span>
+<span id="cb14-6"><a href="structure.html#cb14-6" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb14-7"><a href="structure.html#cb14-7" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;plot_result&quot;</span>)</span>
+<span id="cb14-8"><a href="structure.html#cb14-8" tabindex="-1"></a>    )</span>
+<span id="cb14-9"><a href="structure.html#cb14-9" tabindex="-1"></a>)</span>
+<span id="cb14-10"><a href="structure.html#cb14-10" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb14-11"><a href="structure.html#cb14-11" tabindex="-1"></a>  </span>
+<span id="cb14-12"><a href="structure.html#cb14-12" tabindex="-1"></a>  output<span class="sc">$</span>plot_result <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb14-13"><a href="structure.html#cb14-13" tabindex="-1"></a>    </span>
+<span id="cb14-14"><a href="structure.html#cb14-14" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">x =</span> airquality[, <span class="dv">4</span>], <span class="at">y =</span> airquality[, <span class="fu">as.numeric</span>(input<span class="sc">$</span>choice_select)])</span>
+<span id="cb14-15"><a href="structure.html#cb14-15" tabindex="-1"></a>  </span>
+<span id="cb14-16"><a href="structure.html#cb14-16" tabindex="-1"></a>  })</span>
+<span id="cb14-17"><a href="structure.html#cb14-17" tabindex="-1"></a>}</span>
+<span id="cb14-18"><a href="structure.html#cb14-18" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 <div id="input" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Input<a href="structure.html#input" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is a list-like object that contains all input data from the UI. The input data can be accessed as <code>input$inputId</code>, where <code>inputId</code> is defined in the UI for any given widget. For example, if we refer back the check-box below, we specified the <code>inputId</code> as <code>checkGroup</code>. We can access the value of that specific input using <code>input$checkGroup</code>. It will contain the value <code>1</code> as we specified this in the <code>selected</code> argument. This value will be updated everytime a user selects a different check-box.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="structure.html#cb15-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span>  <span class="fu">fluidPage</span>(</span>
-<span id="cb15-2"><a href="structure.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Copy the chunk below to make a group of checkboxes</span></span>
-<span id="cb15-3"><a href="structure.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="at">inputId =</span> <span class="st">&quot;checkGroup&quot;</span>,</span>
-<span id="cb15-4"><a href="structure.html#cb15-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label =</span> <span class="fu">h3</span>(<span class="st">&quot;Checkbox group&quot;</span>),</span>
-<span id="cb15-5"><a href="structure.html#cb15-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
-<span id="cb15-6"><a href="structure.html#cb15-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>,</span>
-<span id="cb15-7"><a href="structure.html#cb15-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
-<span id="cb15-8"><a href="structure.html#cb15-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">selected =</span> <span class="dv">1</span>)</span>
-<span id="cb15-9"><a href="structure.html#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="structure.html#cb15-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span>  <span class="fu">fluidPage</span>(</span>
+<span id="cb15-2"><a href="structure.html#cb15-2" tabindex="-1"></a>  <span class="co"># Copy the chunk below to make a group of checkboxes</span></span>
+<span id="cb15-3"><a href="structure.html#cb15-3" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="at">inputId =</span> <span class="st">&quot;checkGroup&quot;</span>,</span>
+<span id="cb15-4"><a href="structure.html#cb15-4" tabindex="-1"></a>                     <span class="at">label =</span> <span class="fu">h3</span>(<span class="st">&quot;Checkbox group&quot;</span>),</span>
+<span id="cb15-5"><a href="structure.html#cb15-5" tabindex="-1"></a>                     <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">&quot;Choice 1&quot;</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
+<span id="cb15-6"><a href="structure.html#cb15-6" tabindex="-1"></a>                                    <span class="st">&quot;Choice 2&quot;</span> <span class="ot">=</span> <span class="dv">2</span>,</span>
+<span id="cb15-7"><a href="structure.html#cb15-7" tabindex="-1"></a>                                    <span class="st">&quot;Choice 3&quot;</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
+<span id="cb15-8"><a href="structure.html#cb15-8" tabindex="-1"></a>                     <span class="at">selected =</span> <span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="structure.html#cb15-9" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="output" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Output<a href="structure.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is also a list-like object named according to the <code>outputId</code> arguments created in the UI. In the following example, the <code>outputId</code> for the <code>textOutput</code> is defined as <code>greeting</code> inside the UI. Inside the server function, the output is stored in the <code>outputId</code> using <code>output$greeting</code> (think of it as a storing a value inside a variable). Alternatively, think of it as a way to direct the results of a computation on the server side to a specific <code>outputID</code>.</p>
 <p>The value of the <code>greeting</code> is <code>Hello, World!</code></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="structure.html#cb16-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb16-2"><a href="structure.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span>  <span class="st">&quot;greeting&quot;</span>) <span class="co"># defines outputID</span></span>
-<span id="cb16-3"><a href="structure.html#cb16-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-4"><a href="structure.html#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="structure.html#cb16-5" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb16-6"><a href="structure.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>greeting <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="st">&quot;Hello, World!&quot;</span>) <span class="co"># stores output in the outputID</span></span>
-<span id="cb16-7"><a href="structure.html#cb16-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="structure.html#cb16-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb16-2"><a href="structure.html#cb16-2" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span>  <span class="st">&quot;greeting&quot;</span>) <span class="co"># defines outputID</span></span>
+<span id="cb16-3"><a href="structure.html#cb16-3" tabindex="-1"></a>)</span>
+<span id="cb16-4"><a href="structure.html#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="structure.html#cb16-5" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb16-6"><a href="structure.html#cb16-6" tabindex="-1"></a>  output<span class="sc">$</span>greeting <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="st">&quot;Hello, World!&quot;</span>) <span class="co"># stores output in the outputID</span></span>
+<span id="cb16-7"><a href="structure.html#cb16-7" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="challenge-3-shiny-output-and-server-logic" class="section level3 unnumbered challenge hasAnchor">
 <h3>Challenge 3: Shiny Output and Server logic<a href="structure.html#challenge-3-shiny-output-and-server-logic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Modify the app you created in Challenge 2 to add output and server components.</p>
+<p>Modify the app you created in Challenge 2 to add the output and server components.</p>
 <ol style="list-style-type: decimal">
-<li><p>Add output to the main panel (Hint: use <code>textOutput()</code>)
-Display the name of the dataset selected.
-Display the name of variable selected.
-Display the range of the values selected on the slider.</p></li>
-<li><p>Add R code in the server logic to print the dataset, variable name and the range. (Hint: use <code>renderText({})</code>)</p></li>
+<li>Add output to the main panel (Hint: use <code>textOutput()</code>)
+<ul>
+<li>Display the name of the dataset selected.</li>
+<li>Display the name of variable selected.</li>
+<li>Display the range of the values selected on the slider.</li>
+</ul></li>
+<li>Add R code in the server logic to print the dataset, variable name and the range. (Hint: use <code>renderText({})</code>)</li>
 </ol>
 
 </div>

@@ -1,7 +1,7 @@
 --- 
 title: "Introduction to R Shiny"
 author: "Nitika K., Adele B., Paul F. H."
-date: "`r Sys.Date()`"
+date: "07-04-2023"
 site: bookdown::bookdown_site
 github-repo: nkandhari/R-shiny-MBP
 description: "This is the course mateial for the workshop- `Introduction R Shiny` offered by [Monash Bioinformatics Platform](https://www.monash.edu/researchinfrastructure/bioinformatics)."
