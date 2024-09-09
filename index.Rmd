@@ -23,10 +23,7 @@ Before the tutorial please install R and RStudio,
 Then install packages from CRAN and Bioconductor with the following R code:
 
 ```{r packages, eval=FALSE}
-install.packages("tidyverse")
-install.packages("shiny")
-install.packages("DT")
-install.packages("shinydashboard")
+install.packages(c("tidyverse", "shiny", "DT", "shinydashboard"))
 ```
 
 ## Download files
